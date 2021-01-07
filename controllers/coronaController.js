@@ -41,6 +41,27 @@ class CoronaController {
             return res.status(500).send(err)
         }
     }
+
+    static async coronaIndonesiaProvinsi(req, res) {
+        try {
+            let URL = `https://api.kawalcorona.com/indonesia/provinsi/`
+            let response = await Axios.get(URL)
+            console.log(response.data)
+            let sendData = response.data.map(covid => {
+                return {
+                    province: covid.attributes.Provinsi,
+                    confirmed: covid.attributes.Kasus_Posi,
+                    recovered: covid.attributes.Kasus_Semb,
+                    deaths: covid.attributes.Kasus_Meni,
+                }
+            })
+
+            return res.json({ data: sendData })
+        } catch (err) {
+            // console.log(err)
+            return res.status(500).send(err)
+        }
+    }
 }
 
 module.exports = CoronaController
