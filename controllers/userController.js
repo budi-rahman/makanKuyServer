@@ -2,20 +2,8 @@ const {User} = require('../models')
 const { comparePass, hashPassword } = require('../helpers/hash')
 const { generateToken } = require('../helpers/jwt')
 
+
 class UserController{
-    static register(req,res){
-        const {name, email, password} = req.body  
-        User.create({name, email, password:hashPassword(password)})
-        .then(data => {
-            res.status(201).json({
-                name:data.name,
-                email:data.email
-            })
-        })
-        .catch(err => {
-            res.status(400).json(err)
-        })
-    }
     static login(req,res){
         const {email,password} = req.body
         User.findOne({
@@ -51,4 +39,18 @@ class UserController{
     }
 }
 
-module.exports = {UserController}
+const register = (req,res,next) => {
+    const {name, email, password} = req.body  
+    User.create({name, email, password:hashPassword(password)})
+    .then(data => {
+        res.status(201).json({
+            name:data.name,
+            email:data.email
+        })
+    })
+    .catch(err => {
+        next(err)
+    })
+}
+
+module.exports = {UserController, register}
