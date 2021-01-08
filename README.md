@@ -27,9 +27,15 @@ Server URL : http://localhost:3000
 ### Corona
 | Method | Route                      | Description                           |
 | ------ | -------------------------- | ------------------------------------- |
-| POST   | /corona/global             | Get data corona globally              |
-| POST   | /corona/indonesia          | Get data corona in Indonesia          |
-| POST   | /corona/indonesia/provinsi | Get data corona in Indonesia Province |
+| GET    | /corona/global             | Get data corona globally              |
+| GET    | /corona/indonesia          | Get data corona in Indonesia          |
+| GET    | /corona/indonesia/provinsi | Get data corona in Indonesia Province |
+
+### Places
+| Method | Route            | Description                                     |
+| ------ | ---------------- | ----------------------------------------------- |
+| GET    | /places/list     | Get data all city in Indonesia from 34 province |
+| GET    | /places/province | Get data all province in indonesia              |
 
 ### Zomato
 | Method | Route                                          | Description                                                                 |
@@ -372,7 +378,7 @@ _Response (500)_
 ```
 
 ---
-### GET /corona/indonesia
+### GET /corona/indonesia/provinsi
 ---
 >Get Corona data in Indonesia
 
@@ -401,6 +407,79 @@ _Response ( 200 )_
             "confirmed": 92547,
             "recovered": 78729,
             "deaths": 1201
+        }
+    ]
+}
+```
+
+_Response (500)_
+```
+{
+    "message": "Internal server error"
+}
+```
+
+---
+### GET /places/list
+---
+>Get all 34 provinces in indonesia
+
+_Request Headers_
+```
+Not Needed
+```
+
+_Request Body_
+```
+not needed
+```
+
+_Response ( 200 )_
+```
+{
+    "data": [
+        {
+            "kota": "Simeulue"
+        },
+        {
+            "kota": "Aceh Singkil"
+        }
+    ]
+}
+```
+
+_Response (500)_
+```
+{
+    "message": "Internal server error"
+}
+```
+---
+### GET /places/province
+---
+>Get all city in Indonesia from 34 province
+
+_Request Headers_
+```
+Not Needed
+```
+
+_Request Body_
+```
+not needed
+```
+
+_Response ( 200 )_
+```
+{
+    "data": [
+        {
+            "id": 11,
+            "nama": "Aceh"
+        },
+        {
+            "id": 12,
+            "nama": "Sumatera Utara"
         }
     ]
 }
