@@ -7,7 +7,11 @@ if (process.env.NODE_ENV === "development") {
   const router = require('./routes')
   const errorHnadler = require('./middlewares/errorHandler')
 const errorHandlers = require('./middlewares/errorHandler')
+const cors = require('cors')
 
+
+
+  app.use(cors())
   app.use(express.urlencoded({extended:true}))
   app.use(express.json())
   
