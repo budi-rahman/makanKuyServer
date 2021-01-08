@@ -89,15 +89,14 @@ class UserController {
             next(err)
         }
     }
-}
-
-const register = (req, res, next) => {
-    const { name, email, password } = req.body
-    User.create({ name, email, password: hashPassword(password) })
+    static register (req,res,next) {
+        console.log('masuk register')
+        const {name, email, password} = req.body  
+        User.create({name, email, password:hashPassword(password)})
         .then(data => {
             res.status(201).json({
-                name: data.name,
-                email: data.email
+                name:data.name,
+                email:data.email
             })
         })
         .catch(err => {
@@ -105,4 +104,6 @@ const register = (req, res, next) => {
         })
 }
 
-module.exports = { UserController, register }
+}
+
+module.exports = {UserController}

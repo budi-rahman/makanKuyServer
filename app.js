@@ -9,6 +9,7 @@ const errorHnadler = require('./middlewares/errorHandler')
 const errorHandlers = require('./middlewares/errorHandler')
 const cors = require('cors')
 
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
@@ -20,3 +21,4 @@ app.use(errorHandlers)
 app.listen(port, () => {
   console.log(`Bismillah jalan di port ${port}`)
 })
+

@@ -9,7 +9,6 @@ class ZomatoController {
             // console.log(response.data)
             let data = response.data.cuisines
             data = data.map(detail => { return detail.cuisine })
-
             return res.json({ data: data })
         } catch (err) {
             // console.log(err)
@@ -41,9 +40,14 @@ class ZomatoController {
 
     static async all(req, res) {
         try {
-            console.log('>>> params : ', req.params)
-
-            let URL = `https://developers.zomato.com/api/v2.1/search?entity_id=74&entity_type=city`
+            console.log('>>> body : ', req.body.sort)
+            let sort = ''
+            if (req.body.sort == 'asc') {
+                let sort = '&sort=rating&order=asc'
+            } else if (req.body.sort == 'desc') {
+                let sort = '&sort=rating&order=desc'
+            }
+            let URL = `https://developers.zomato.com/api/v2.1/search?entity_id=74&entity_type=city${sort}`
             let ZOMATO_KEY = '980fda904333cc2eb792a7775c6f12bc'
             let response = await Axios.get(URL, { headers: { 'user-key': ZOMATO_KEY } })
             let temp = response.data.restaurants
@@ -71,12 +75,18 @@ class ZomatoController {
 
     static async search(req, res) {
         try {
-            console.log('>>> params : ', req.params)
+            let sort = ''
+            if (req.body.sort == 'asc') {
+                let sort = '&sort=rating&order=asc'
+            } else if (req.body.sort == 'desc') {
+                let sort = '&sort=rating&order=desc'
+            }
+            console.log('>>> body : ', req.body)
             let { cuisine_id, establishment_id } = req.params
             cuisine_id ? cuisine_id : 1040
             establishment_id ? establishment_id : 1
 
-            let URL = `https://developers.zomato.com/api/v2.1/search?entity_id=74&entity_type=city&cuisines=${cuisine_id}&establishment_type=${establishment_id}`
+            let URL = `https://developers.zomato.com/api/v2.1/search?entity_id=74&entity_type=city&cuisines=${cuisine_id}&establishment_type=${establishment_id}${sort}`
             let ZOMATO_KEY = '980fda904333cc2eb792a7775c6f12bc'
             let response = await Axios.get(URL, { headers: { 'user-key': ZOMATO_KEY } })
             let temp = response.data.restaurants
