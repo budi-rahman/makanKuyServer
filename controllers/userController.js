@@ -1,7 +1,7 @@
 const { User } = require('../models')
 const { comparePass, hashPassword } = require('../helpers/hash')
 const { generateToken } = require('../helpers/jwt')
-
+const { OAuth2Client } = require('google-auth-library');
 
 class UserController {
     static login(req, res) {
@@ -42,19 +42,19 @@ class UserController {
         try {
             // console.log('>>> body.id_token : ', req.body.id_token)
             const { id_token } = req.body
-            const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+            const client = new OAuth2Client('847872434739-ieov91f4btpg8551tira12pvdtatudrg.apps.googleusercontent.com')
             const ticket = await client.verifyIdToken({
                 idToken: id_token,
                 audience: '847872434739-ieov91f4btpg8551tira12pvdtatudrg.apps.googleusercontent.com'
             });
 
             const payload = ticket.getPayload()
-            console.log('>>> payload : ', payload)
+            // console.log('>>> payload : ', payload)
 
             const email = payload.email
             let password = email.toString().split('@')
             password = password[0]
-            console.log('>>> user : ', email, password)
+            console.log('>>>user : ', email, password)
 
             let user = await User.findOne({ where: { email } })
             // console.log('>>> user : ', user)
