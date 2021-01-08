@@ -11,6 +11,7 @@ npm i
 sequelize db:migrate
 
 RUN
+npm install -g nodemon (if you dont have installed globally)
 nodemon app.js (if you have installed nodemon globally)
 
 Server URL : http://localhost:3000
@@ -23,6 +24,11 @@ Server URL : http://localhost:3000
 | ------ | -------------- | ------------ |
 | POST   | /user/register | Add new user |
 | POST   | /user/login    | Login user   |
+
+### Weather
+| Method | Route            | Description                    |
+| ------ | ---------------- | ------------------------------ |
+| GET    | /weather/current | Get weather current of Jakarta |
 
 ### Corona
 | Method | Route                      | Description                           |
@@ -119,6 +125,56 @@ _Response (500)_
 ```
 {
     "msg": "Internar server error"
+}
+```
+
+---
+### GET /weather/current
+---
+>Get All restaurants recommendation In Jakarta
+
+_Request Headers_
+```
+Not needed
+```
+
+_Request Body_
+```
+not needed
+```
+
+_Response ( 200 )_
+```
+{
+    "data": {
+        "observation_time": "07:32 AM",
+        "temperature": 26,
+        "weather_code": 296,
+        "weather_icons": [
+            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0017_cloudy_with_light_rain.png"
+        ],
+        "weather_descriptions": [
+            "Light Rain"
+        ],
+        "wind_speed": 9,
+        "wind_degree": 330,
+        "wind_dir": "NNW",
+        "pressure": 1006,
+        "precip": 0.2,
+        "humidity": 94,
+        "cloudcover": 50,
+        "feelslike": 27,
+        "uv_index": 7,
+        "visibility": 4,
+        "is_day": "yes"
+    }
+}
+```
+
+_Response (500)_
+```
+{
+    "message": "Internal server error"
 }
 ```
 
