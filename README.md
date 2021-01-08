@@ -48,6 +48,81 @@ Server URL : http://localhost:3000
 | GET    | /zomato/search/:cuisine_id/:establishment_id   | Search all restaurants recommendation In Jakarta by cuisine & establishment |
 
 ---
+### POST /user/login
+---
+> login user
+
+_Request Headers_
+```
+Not needed
+```
+
+_Request Body_
+```
+{
+    email : user01@gmail.com,
+    password : user01
+}
+```
+
+_Response ( 200 )_
+```
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InJvbWl6YWtpIiwiZW1haWwiOiJyemZlcmRpeWFudG9AZ21haWwuY29tIiwiaWF0IjoxNjEwMDg5NTk3fQ.SsRxk2IWB_Z11AWIpXOBcZIVt4Mm22gM04PIMC2n99g"
+}
+```
+
+_Response (401)_
+```
+{
+    "msg": "Invalid Email/Password"
+}
+```
+
+---
+### POST /user/register
+---
+> register user
+
+_Request Headers_
+```
+Not needed
+```
+
+_Request Body_
+```
+{
+    email : user01@gmail.com,
+    password : user01
+}
+```
+
+_Response ( 200 )_
+```
+{
+    "name": "Romi Zaki",
+    "email": "greedymons@gmail.com"
+}
+```
+
+_Response (400)_
+```
+[
+    {
+        "message": "email must be unique",
+        "column": "email"
+    }
+]
+```
+
+_Response (500)_
+```
+{
+    "msg": "Internar server error"
+}
+```
+
+---
 ### GET /zomato/all
 ---
 >Get All restaurants recommendation In Jakarta
